@@ -3,4 +3,4 @@
 ### cgi程序修改自J.David源码，以验证服务端逻辑功能。后续考虑抽象“子进程选择”功能，采用其他负载均衡策略测试。由于cgi会使用标准输入输出接口，故守护进程功能（daemon_init）未进行部署。
 ### 参考文献《Linux高性能服务器编程》《UNIX网络编程卷1》
 ### 最后。JUST FOR FUN
-Copyright by Malt
+Copyright by Malt（1072829851@qq.com）
