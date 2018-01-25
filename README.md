@@ -3,5 +3,10 @@
 ## 实现模型图：
 ![](system.png)
 ### cgi程序修改自J.David源码，以验证服务端逻辑功能。后续考虑抽象“子进程选择”功能，采用其他负载均衡策略测试。由于cgi会使用标准输入输出接口，故守护进程功能（daemon_init）未进行部署。
+###
+部署方法：
+make
+./tinyserver
+浏览器输入：127.0.0.1:/8001
 ### 最后。JUST FOR FUN
 Copyright by Malt（1072829851@qq.com）
