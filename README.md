@@ -7,5 +7,6 @@
 ### make
 ### ./tinyserver
 ### 在浏览器输入：127.0.0.1:8001
+### 如果POST命令不能正常显示返回结果，将htdocs目录下的cgi文件设置为可执行权限
 ### 最后。JUST FOR FUN
 Copyright by Malt（chenjiaxin2604@qq.com）

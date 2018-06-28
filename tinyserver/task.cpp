@@ -300,6 +300,7 @@ void task_conn::execute_cgi(int client, const char *path, const char *method, co
             /*recv POST data*/
             for (i = 0; i < content_length; i++) {
                 recv(client, &c, 1, 0);
+                log(LOG_DEBUG_L, __FILE__, __LINE__, "contents is %c", c);
                 /*write POST data in cgi_input */
                 write(cgi_input[1], &c, 1);
             }

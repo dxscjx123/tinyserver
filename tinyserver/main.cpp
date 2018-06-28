@@ -13,7 +13,7 @@
 #include "daemon.h"
 
 #define DEFAULT_PORT 8001
-#define SET_LOG_LEVEL LOG_INFO_L
+#define SET_LOG_LEVEL LOG_USER_L
 
 using namespace std;
 

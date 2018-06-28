@@ -13,6 +13,7 @@
 
 #include "predefine.h"
 #include "log.h"
+#include "task.h"
 
 #define DEFAULT_PROCESS_NUMBER 8
 
@@ -33,18 +34,8 @@ private:
 	void run_child(void);
 	void setup_sig_pipe(void);
 public:
-	static processpool< T >* create( int listenfd, int process_number = DEFAULT_PROCESS_NUMBER )
-	{
-		if ( !m_instance )
-		{
-			m_instance = new processpool< T >( listenfd, process_number);
-		}
-		return m_instance;
-	}
-	~processpool()
-	{
-		delete [] m_sub_process;
-	}
+	static processpool< T >* create( int listenfd, int process_number = DEFAULT_PROCESS_NUMBER );
+	~processpool(void);
 	void run();
 private:
 	static const int MAX_PROCESS_NUMBER = 16;
@@ -60,8 +51,24 @@ private:
 	//static int sig_pipefd[2];
 };
 
-template< typename T >
-processpool< T >* processpool < T >::m_instance = NULL;
+template<typename T>
+processpool<T>* processpool<T>::m_instance = NULL;
+
+template<typename T>
+processpool<T>* processpool<T>::create(int listenfd, int process_number)
+{
+	if (!m_instance)
+	{
+		m_instance = new processpool<T>(listenfd, process_number);
+	}
+	return m_instance;
+}
+
+template<typename T>
+processpool<T>::~processpool(void)
+{
+	delete []m_sub_process;
+}
 
 template< typename T >
 processpool< T >::processpool( int listenfd, int process_number )
@@ -91,16 +98,16 @@ processpool< T >::processpool( int listenfd, int process_number )
 	}
 }
 
-template< typename T >
-void processpool< T >::run()
+template<typename T>
+void processpool<T>::run(void)
 {
-	if ( m_idx != -1 )
+	if (m_idx != -1)
 	{
+		log(LOG_INFO_L, __FILE__, __LINE__, "child pid is %d", getpid());
 		run_child();
 		return ;
 	}
-	log( LOG_INFO_L, __FILE__, __LINE__, "parent pid is %d", getpid() );
-	//printf( "parent pid is %d\n", getpid() );
+	log(LOG_INFO_L, __FILE__, __LINE__, "parent pid is %d", getpid());
 	run_parent();
 }
 
